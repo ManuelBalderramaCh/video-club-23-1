@@ -13,8 +13,8 @@ var awaitListRouter = require('./routes/awaitList');
 var genreRouter = require('./routes/genres');
 var actorsRouter = require('./routes/actors');
 var directorsRouter = require('./routes/directors');
-var membersRouter = require('./routes/members');
-var adressRouter = require('./routes/adress');
+const membersRouter = require('./routes/members');
+const adressRouter = require('./routes/adress');
 
 
 var app = express();
@@ -35,7 +35,7 @@ app.use('/movie', movieRouter);
 app.use('/booking',bookingRouter);
 app.use('/copy',copyRouter);
 app.use('/awaitList',awaitListRouter);
-app.use('/genre',genreRouter);
+app.use('/genres',genreRouter);
 app.use('/actors',actorsRouter);
 app.use('/directors',directorsRouter);
 app.use('/members',membersRouter);

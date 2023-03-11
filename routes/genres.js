@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/genre');
+const controller = require('../controllers/genres');
 
 /* GET users listing. */
 router.get('/', controller.list);
@@ -15,4 +15,4 @@ router.patch('/:id', controller.update);
 
 router.delete('/:id', controller.destroy);
 
-module.exports = router;
+module.exports=router;
