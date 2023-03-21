@@ -2,7 +2,7 @@ const express = require('express');
 const { Actor } = require('../db');
 
 function list(req, res, next) {
-    Actor.findAll()
+    Actor.findAll({include:['movies']})
             .then(objects => res.json(objects))
             .catch(err => res.send(error));
 }
