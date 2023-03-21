@@ -6,15 +6,15 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var movieRouter = require('./routes/movie');
+const moviesRouter = require('./routes/movies');
 var bookingRouter = require('./routes/booking');
 var copyRouter = require('./routes/copy');
 var awaitListRouter = require('./routes/awaitList');
 var genreRouter = require('./routes/genres');
-var actorsRouter = require('./routes/actors');
+const actorsRouter = require('./routes/actors');
 var directorsRouter = require('./routes/directors');
-var membersRouter = require('./routes/members');
-var adressRouter = require('./routes/adress');
+const membersRouter = require('./routes/members');
+const adressRouter = require('./routes/adress');
 
 
 var app = express();
@@ -31,11 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/movie', movieRouter);
+app.use('/movies', moviesRouter);
 app.use('/booking',bookingRouter);
 app.use('/copy',copyRouter);
 app.use('/awaitList',awaitListRouter);
-app.use('/genre',genreRouter);
+app.use('/genres',genreRouter);
 app.use('/actors',actorsRouter);
 app.use('/directors',directorsRouter);
 app.use('/members',membersRouter);
