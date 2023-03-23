@@ -2,11 +2,24 @@ const express = require('express');
 const Director = require('../models/director');
 
 function list(req, res, next) {
-    res.send('respond with a actor list');
+    Director.find().then(objs => res.status(200).json({
+        message: "lista de directores",
+        obj: objs
+    })).catch(ex => res.status(500).json({
+        message: "No se pudo consultar la informacion",
+        obj: ex
+    }));
 }
 
 function index(req, res, next) {
-    res.send(`respond with a index of a actor= ${req.params.id}`);
+    const id = req.params.id;
+    Director.findOne({"_id":id}).then(obj => res.status(200).json({
+        message: `Director con id ${id}`,
+        obj: obj
+    })).catch(ex => res.status(500).json({
+        message: "No se pudo consultar la informacion",
+        obj: ex
+    }));
 }
 
 function create(req, res, next) {
@@ -27,7 +40,23 @@ function create(req, res, next) {
 }
 
 function replace(req, res, next) {
-    res.send(`respond with a replace actor= ${req.params.id}`);
+   const id = req.params.id;
+   let name = req.body.name ? req.body.name : "";
+   let lastName = req.body.lastName ? req.body.lastName : "";
+   
+   let director = new Object({
+    _name: name,
+    _lastname: lastName
+    });
+
+    Director.findOneAndUpdate({"_id":id}, director, {new : true})
+            .then(obj => res.status(200).json({
+                mesagge: "Director actualizado correctamente",
+                obj: obj
+            })).catch(ex => res.status(500).json({
+                message: "No se pudo reemplazar el director",
+                obj:ex
+            }));
 }
 
 function update(req, res, next) {
@@ -35,7 +64,14 @@ function update(req, res, next) {
 }
 
 function destroy(req, res, next) {
-    res.send(`respond with a destory actor= ${req.params.id}`);
+    const id = req.params.id;
+    Director.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+        message: "Director eliminado correctamente",
+        obj:obj
+    })).catch(ex => res.status(500).json({
+        message: "No se pudo eliminar el director",
+        obj:ex
+    }));
 }
 
 module.exports = { 
