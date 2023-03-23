@@ -1,23 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
-var bookingRouter = require('./routes/booking');
-var copyRouter = require('./routes/copy');
-var awaitListRouter = require('./routes/awaitList');
-var genreRouter = require('./routes/genres');
+const bookingRouter = require('./routes/bookings');
+const copyRouter = require('./routes/copys');
+const awaitListRouter = require('./routes/awaitList');
+const genreRouter = require('./routes/genres');
 const actorsRouter = require('./routes/actors');
-var directorsRouter = require('./routes/directors');
+const directorsRouter = require('./routes/directors');
 const membersRouter = require('./routes/members');
 const adressRouter = require('./routes/adress');
 
-
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,8 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
-app.use('/booking',bookingRouter);
-app.use('/copy',copyRouter);
+app.use('/bookings',bookingRouter);
+app.use('/copys',copyRouter);
 app.use('/awaitList',awaitListRouter);
 app.use('/genres',genreRouter);
 app.use('/actors',actorsRouter);

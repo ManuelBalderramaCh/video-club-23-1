@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/booking');
+const controller = require('../controllers/copys');
 
 /* GET users listing. */
 router.get('/', controller.list);

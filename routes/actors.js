@@ -13,6 +13,8 @@ router.put('/:id', controller.replace);
 
 router.patch('/:id', controller.update);
 
+router.patch('/add/movie', controller.addMovie);
+
 router.delete('/:id', controller.destroy);
 
 module.exports=router;

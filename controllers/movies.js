@@ -15,12 +15,12 @@ function index(req, res, next) {
 function create(req, res, next) {
     const title = req.body.title;
     const genreId = req.body.genreId;
-    const directorId = req.body.directorId;
+    const directorId  = req.body.directorId;
 
     let movie = new Object({
         title:title,
         genreId:genreId,
-        directorId:directorId,
+        directorId:directorId
     });
 
     Movie.create(movie)  
@@ -38,7 +38,7 @@ function addActor(req, res, next){
                  .then(actor =>{
                     movie.addActor(actor)
                     res.json(movie);
-                 }).catch(err => res.send(err));
+               }).catch(err => res.send(err));
         }).catch(err => res.send(err));
     
 }
