@@ -3,7 +3,7 @@ const { Movie, Actor } = require('../db');
 
 
 function list(req, res, next) {
-    Movie.findAll({include:['genre', 'director', 'actor']})
+    Movie.findAll({include:['movies','genre', 'director', 'actor']})
          .then(objects => res.json(objects))    
          .catch(err => res.send(err));
 }

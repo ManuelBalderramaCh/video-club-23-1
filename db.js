@@ -46,6 +46,11 @@ MovieActor.belongsTo(Movie, {foreignKey: 'movieId'});
 // En una pelicula participan muchos actores
 MovieActor.belongsTo(Actor, {foreignKey: 'actorId'});
 
+// Un miembro tiene muchos libretos
+Member.hasMany(Booking, {as: 'bookings'});
+
+// Una copia tiene muchos libretos
+Copy.hasMany(Booking, {as: 'bookings'});
 
 
 Movie.belongsToMany(Actor, {

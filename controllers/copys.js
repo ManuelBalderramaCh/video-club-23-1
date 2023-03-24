@@ -35,7 +35,7 @@ function replace(req, res, next){
     const id = req.params.id;
     Copy.findByPk(id)
             .then((object) => {
-                const number = req.body.number ? req.body.number :"";
+                const number = req.body.number ? req.body.number : null;
                 const format = req.body.format ? req.body.format :" ";
                 const status = req.body.status ? req.body.status : "";
                 object.update({number:number,format:format, status:status})
