@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/movie');
+const controller = require('../controllers/movies');
 
 /* GET users listing. */
 router.get('/', controller.list);

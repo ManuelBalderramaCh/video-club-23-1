@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const movieRouter = require('./routes/movie');
+const movieRouter = require('./routes/movies');
 const bookingRouter = require('./routes/booking');
 const copyRouter = require('./routes/copy');
 const awaitListRouter = require('./routes/awaitList');
@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/movie', movieRouter);
+app.use('/movies', movieRouter);
 app.use('/booking',bookingRouter);
 app.use('/copy',copyRouter);
 app.use('/awaitList',awaitListRouter);

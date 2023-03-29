@@ -60,7 +60,26 @@ function replace(req, res, next) {
 }
 
 function update(req, res, next) {
-    res.send(`respond with a update actor = ${req.params.id}`);
+    const id = req.params.id;
+    let name = req.body.name;
+    let lastName = req.body.lastName;
+
+    let director = new Object();
+
+    if(name)
+        director._name = name;
+    
+    if(lastName)
+        director._lastname = lastName;
+
+    Director.findOneAndUpdate({"_id":id}, director)
+            .then(obj => res.status(200).json({
+                mesagge: "Director actualizado correctamente",
+                obj:obj
+            })).catch(ex => res.status(500).json({
+                message: "No se pudo actualizar el director",
+                obj:ex
+            }));
 }
 
 function destroy(req, res, next) {
