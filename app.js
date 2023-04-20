@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const {expressjwt} = require('express-jwt');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -15,6 +16,8 @@ const actorsRouter = require('./routes/actors');
 const directorsRouter = require('./routes/directors');
 const membersRouter = require('./routes/members');
 const adressRouter = require('./routes/adress');
+
+const jwtKey = "4e0214edc70d400e41d26702d7a3ea02";
 
 // mongodb:://<dbUser>?:<dbPass>?@<direction>:<port>/<dbName>
 const uri = "mongodb://localhost:27017/video-club-app";
@@ -42,6 +45,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(expressjwt({secret: jwtKey, algorithms: ['HS256']})
+   .unless({path:["/login"]}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', movieRouter);
