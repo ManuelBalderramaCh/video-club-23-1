@@ -14,13 +14,11 @@ function login(req, res, next){
 
     //Busca un usuario en el sistema en donde sea el email que coincide
     User.findOne({"_email":email}).select('_password _salt').then(user =>{ 
-        console.log(user);
         if(user){
             bcrypt.hash(password, user.salt, (err, hash) => {
-                console.log("llego hasta aqui 2"+hash);
                 if(err){
                     res.status(403).json({
-                        message: "Usuario y/o contrasena incorrecto 1",
+                        message: "Usuario y/o contrasena incorrecto",
                         obj: err
                     });
                 }
@@ -32,19 +30,19 @@ function login(req, res, next){
                     });
                 }else{
                     res.status(403).json({
-                        message: "Usuario y/o contrasena incorrecto 2",
+                        message: "Usuario y/o contrasena incorrecto",
                         obj: null
                     });
                 }
             });
         }else{
             res.status(403).json({
-                message: "Usuario y/o contrasena incorrecto 3",
+                message: "Usuario y/o contrasena incorrecto",
                 obj: null
             });
         }
     }).catch(ex => res.status(403).json({
-        message: "Usuario y/o contrasena incorrecto 4",
+        message: "Usuario y/o contrasena incorrecto",
         obj: ex
     }));
 }

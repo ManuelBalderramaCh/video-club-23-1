@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { list } = require('../controllers/users');
 
 const schema = mongoose.Schema({
     _name: String,
