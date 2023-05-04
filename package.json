@@ -8,7 +8,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "acl": "^0.4.11",
+    "@casl/ability": "^6.5.0",
+    "@casl/mongoose": "^7.1.2",
     "bcrypt": "^5.1.0",
     "config": "^3.3.9",
     "cookie-parser": "~1.4.4",
@@ -18,7 +19,9 @@
     "http-errors": "~1.6.3",
     "i18n": "^0.15.1",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.2",
+    "log4js": "^6.9.1",
+    "mongoose": "^6.0.11",
+    "mongoose-paginate-v2": "^1.7.1",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11"
   },

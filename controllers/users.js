@@ -2,7 +2,6 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const async = require('async');
 
-
 const User = require('../models/user');
 const adminAbility = require('../models/adminAbility')
 const userAblility = require('../models/userAbility');
@@ -31,57 +30,15 @@ async function list(req, res, next) {
             res.status(200).json({
                 message: res.__('ok.users'),
                 obj: query
-            })
+            });
           } catch (error) {
-            console.log(error) // ForbiddenError;
+            console.log(error);
             res.status(500).json({
                 message: 'ERROR',
                 obj: error
-            })
+            });
           }
-    })
-    
-    // user = JSON.parse(JSON.stringify(user))
-    // user._profiles.forEach(async(profileId) => {
-    //     profilePermissions = await Profile.findOne({"_id":profileId});
-    //     profilePermissions = JSON.parse(JSON.stringify(profilePermissions))._permissions;
-    //     console.log(profilePermissions)
-    //     profilePermissions.forEach(async(permissionId) => {
-    //         let read = await Permission.findOne({"_id":permissionId});
-    //         read = JSON.parse(JSON.stringify(read))._type;
-    //         console.log(read);
-    //         if(read == "READ"){
-    //             User.find().populate('_profiles').then(
-    //                 objs=>res.status(200).json({
-    //                     message: 'Lista de actores del sistema',
-    //                     obj: objs
-    //                 })
-    //             )
-    //         }
-    //     })
-    // })
-    
-    // if(permissions[user._role].can('read', 'User')){
-    //     let page = req.params.page ? req.params.page : 1;
-    //     User.paginate({}, {page:page, limit:20}).then(
-    //         objs=>res.status(200).json({
-    //             message: 'Lista de actores del sistema',
-    //             obj: objs
-    //         })
-    //     ).catch(
-    //         ex=>res.status(500).json({
-    //             message: 'No se pudo consultar la informacion de los actores',
-    //             obj: ex
-    //         })
-    //     );
-    // }else{
-    //     res.status(500).json({
-    //         message: 'No tiene permiso'
-    //     })    
-    // }
-
-    
-    
+    });
 }
 
 function index(req, res, next) {
