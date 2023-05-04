@@ -46,7 +46,7 @@ function replace(req, res, next) {
    
    let director = new Object({
     _name: name,
-    _lastname: lastName
+    _lastName: lastName
     });
 
     Director.findOneAndUpdate({"_id":id}, director, {new : true})
