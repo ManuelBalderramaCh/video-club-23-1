@@ -18,5 +18,5 @@ class Genre {
     }
 }
 
-schema.loadClass(Genre);
-module.exports = mongoose.model('Genre', schema);
+Schema.loadClass(Genre);
+module.exports = mongoose.model('Genre', Schema);

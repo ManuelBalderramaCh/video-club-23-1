@@ -13,19 +13,22 @@ function login(req, res, next){
     const password = req.body.password;
     const jwtKey = config.get("secret.key");
 
-    User.findOne({"_email":email}).select('_password _salt').then(user =>{ 
+    User.findOne({"_email":email}).select('_password _salt').then(user =>{
+        console.log(user);
         if(user){
             bcrypt.hash(password, user.salt, (err, hash) => {
+                console.log("llego hasta aqui 2 "+hash);
                 if(err){
                     res.status(403).json({
                         message: res.__('bad.login'),
                         obj: err
                     });
                 }
+                console.log("llego hasta aqui");
                 if(hash === user.password){
                     res.status(200).json({
                         message: res.__('ok.login'),
-                        obj: jwt.sign({data: user.id, exp: Math.floor(Date.now()/1000)+600}, jwtKey)
+                        obj: jwt.sign({exp: Math.floor(Date.now()/1000)+6000}, jwtKey)
                     });
                 }else{
                     res.status(403).json({

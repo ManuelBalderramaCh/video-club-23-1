@@ -1,161 +1,98 @@
+const express = require('express');
 const Copy = require('../models/copy');
-const log4js = require('log4js')
-var logger = log4js.getLogger();
-
-function create(req, res, next) {
-    const {
-        format,
-        movie,
-        number,
-        status
-    } = req.body;
-
-    let copy = new Copy({
-        format: format,
-        movie: movie,
-        number: number,
-        status: status
-    });
-
-    copy.save().then(obj => {
-        logger.level = "info";
-        logger.info(res.__('ok.copies.create'));
-        res.status(200).json({
-        message: res.__('ok.copies.create'),
-        objs: obj
-    })}).catch(err => {
-        logger.level = "error";
-        logger.error(res.__('error.copies.create'));
-        res.status(500).json({
-        message: res.__('error.copies.create'),
-        objs: err
-    })});
-}
 
 function list(req, res, next) {
-    Copy.find().populate('_movie').then(obj => {
-        logger.level = "info";
-        logger.info(res.__('ok.copies.list'));
-        res.status(200).json({
-        message: res.__('ok.copies.list'),
-        objs: obj
-    })}).catch(err => {
-        logger.level = "error";
-        logger.error(res.__('error.copies.list'));
-        res.status(500).json({
-        message: res.__('error.copies.list'),
-        objs: err
-    })});
+    Copy.find().then(objs => res.status(200).json({
+        message: res.__('ok.copy'),
+        obj: objs
+    })).catch(ex => res.status(500).json({
+        message: res.__('bad.copy'),
+        obj: ex
+    }));
 }
 
 function index(req, res, next) {
     const id = req.params.id;
-    Copy.findOne({'_id':id}).populate('_movie').then(obj => {
-        logger.level = "info";
-        logger.info(res.__('ok.copies.index'));
-        res.status(200).json({
-        message: res.__('ok.copies.index'),
-        objs: obj
-    })}).catch(err => {
-        logger.level = "error";
-        logger.error(res.__('error.copies.index'));
-        res.status(500).json({
-        message: res.__('error.copies.index'),
-        objs: err
-    })}); 
+    Copy.findOne({"_id":id}).then(obj => res.status(200).json({
+        message: res.__('ok.copy'),
+        obj: obj
+    })).catch(ex => res.status(500).json({
+        message:res.__('bad.copy'),
+        obj:ex
+    }));
 }
 
-function edit(req, res, next) {
+function create(req, res, next) {
+    let number = req.body.number;
+
+    let copy = new Copy({
+        number:number
+    });
+
+    copy.save().then(obj => res.status(200).json({
+        message: res.__('ok.copy'),
+        obj:obj
+    })).catch(ex => res.status(500).json({
+        message: res.__('bad.copy'),
+        ex:ex
+    }));
+}
+
+function replace(req, res, next) {
     const id = req.params.id;
-    const copy = new Object();
+    let number = req.body.number ? req.body.number : "";
 
-    const {
-        format,
-        movie,
-        number,
-        status
-    } = req.body;
-
-    if(format){
-        copy._format = format;
-    }
+    let copy = new Object({
+        _number: number
+    });
     
-    if(movie){
-        copy._movie = movie;
-    }
+    Copy.findOneAndUpdate({"_id":id},copy,{new : true})
+            .then(obj => res.status(200).json({
+                message:res.__('ok.copy'),
+                obj: obj
+            })).catch(ex => res.status(500).json({
+                message: res.__('bad.copy'),
+                obj:ex
+            }));
+}
+
+function update(req, res, next) {
+    const id = req.params.id;
+    let number = req.body.number;
+
+    let copy = new Object(); 
 
     if(number){
         copy._number = number;
     }
 
-    if(status){
-        copy._status = status;
-    }
-    
-
-    Copy.findOneAndUpdate({"_id":id}, copy).then(obj => {
-        logger.level = "info";
-        logger.info(res.__('ok.copies.edit'));
-        res.status(200).json({
-        message: res.__('ok.copies.edit'),
-        objs: obj
-    })}).catch(err => {
-        logger.level = "error";
-        logger.error(res.__('error.copies.edit'));
-        res.status(500).json({
-        message: res.__('error.copies.edit'),
-        objs: err
-    })}); 
-}
-
-function replace(req, res, next) {
-    const id = req.params.id;
-    const {
-        format,
-        movie,
-        number,
-        status
-    } = req.body;
-
-    let copy = new Object({
-        _format: format,
-        _movie: movie,
-        _number: number,
-        _status: status
-    });
-
-    Copy.findOneAndReplace({'_id':id}, copy).then(obj => {
-        logger.level = "info";
-        logger.info(res.__('ok.copies.replace'));
-        res.status(200).json({
-        message: res.__('ok.copies.replace'),
-        objs: obj
-    })}).catch(err => {
-        logger.level = "error";
-        logger.error(res.__('error.copies.replace'));
-        res.status(500).json({
-        message: res.__('error.copies.replace'),
-        objs: err
-    })}); 
+    Copy.findOneAndUpdate({"_id":id},copy)
+            .then(obj => res.status(200).json({
+                message: res.__('ok.copy'),
+                obj:obj
+            })).catch(ex => res.status(500).json({
+                message: res.__('bad.copy'),
+                obj:ex
+            }));
 }
 
 function destroy(req, res, next) {
     const id = req.params.id;
-    Copy.remove({'_id':id}).then(obj => {
-        logger.level = "info";
-        logger.info(res.__('ok.copies.destroy'));
-        res.status(200).json({
-        message: res.__('ok.copies.destroy'),
-        objs: obj
-    })}).catch(err => {
-        logger.level = "error";
-        logger.error(res.__('error.copies.destroy'));
-        res.status(500).json({
-        message: res.__('error.copies.destroy'),
-        objs: err
-    })}); 
+    Copy.findByIdAndRemove({"_id":id})
+            .then(obj => res.status(200).json({
+                message: res.__('ok.copy'),
+                obj:obj
+            })).catch(ex => res.status(500).json({
+                message: res.__('bad.copy'),
+                obj:ex
+            }));
 }
 
-module.exports = {
-    create, list, index, edit, replace, destroy
-}
+module.exports = { 
+    list,
+    index,
+    create,
+    replace,
+    update,
+    destroy
+};

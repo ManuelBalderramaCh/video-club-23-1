@@ -1,6 +1,5 @@
 const express = require('express');
 const Director = require('../models/director');
-
 function list(req, res, next) {
     Director.find().then(objs => res.status(200).json({
         message: res.__('ok.director'),
@@ -48,7 +47,7 @@ function replace(req, res, next) {
         _name: name,
         _lastName: lastName
     });
-
+    
     Director.findOneAndUpdate({"_id":id},director,{new : true})
             .then(obj => res.status(200).json({
                 message: res.__('ok.director'),
