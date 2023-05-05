@@ -20,7 +20,6 @@ const actorsRouter = require('./routes/actors');
 const permisionsRouter = require('./routes/permisions');
 const directorsRouter = require('./routes/directors');
 const membersRouter = require('./routes/members');
-const adressRouter = require('./routes/adress');
 
 const jwtKey = config.get("secret.key");
 
@@ -67,7 +66,6 @@ app.use('./permisions', permisionsRouter);
 app.use('/actors',actorsRouter);
 app.use('/directors',directorsRouter);
 app.use('/members',membersRouter);
-app.use('/adress',adressRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
