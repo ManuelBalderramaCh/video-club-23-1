@@ -2,5 +2,5 @@
     "secret":{
         "key":"bd578fb91f6de272c16a1302328ee8ba"
     },
-    "dbChain":"mongodb+srv://a330836:<rrfEJnvXBCYP4TPm>@videoclub.vperavn.mongodb.net/?retryWrites=true&w=majority"
+    "dbChain":"mongodb://localhost:27017/video-club-app-prod"
 }
