@@ -1,0 +1,39 @@
+//- extends layout
+
+//- block content
+//-   h1= title
+//-   p Welcome to #{title}
+//-   p Probando el template Jade
+
+doctype html 
+html(lang='en')
+  head 
+    title=pageTitle 
+    script(type='text/javascript').
+  body 
+  h1 Jade - node template engine 
+  p Jade is a terse and simple templating language with a strong focus on performance and powerful features.
+
+  h2 Completando la tarea de usar un template diferente a pug
+  p Se descargo por medio de npm i jade --save y se probo en el index.jade
+
+  ul#books 
+    li 
+      a(href="#ejemplo-a") Ejemplo A
+    ul#books 
+    li 
+      a(href="#ejemplo-b") Ejemplo B
+
+//- select 
+//-   each book, i in books 
+//-     option(value=i) Book #{book}
+
+//- {"books": ["A", "B", "C"]}
+
+//- ul 
+//-   for book in books 
+//-     li=book 
+//-   else 
+//-     li sorry, no books!
+
+//- {"books": []} 
